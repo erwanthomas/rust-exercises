@@ -1,0 +1,6 @@
+[package]
+name = "converter"
+version = "0.1.0"
+authors = ["Erwan Thomas <janotus@maen.fr>"]
+
+[dependencies]
