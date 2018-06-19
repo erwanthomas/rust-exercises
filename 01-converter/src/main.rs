@@ -18,17 +18,18 @@ fn main() {
 
         let mut input = String::new();
 
-        io::stdin().read_line(&mut input).expect("Failed to read line");
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
 
-        conversion =
-            match input.trim().parse::<u8>() {
-                Ok(num) => num,
-                Err(error) => {
-                    println!("Error: {}", error);
-                    println!("Please enter a valid conversion.");
-                    continue;
-                }
-            };
+        conversion = match input.trim().parse::<u8>() {
+            Ok(num) => num,
+            Err(error) => {
+                println!("Error: {}", error);
+                println!("Please enter a valid conversion.");
+                continue;
+            }
+        };
 
         match conversion {
             F2C | C2F => break,
@@ -47,17 +48,18 @@ fn main() {
 
         let mut input = String::new();
 
-        io::stdin().read_line(&mut input).expect("Failed to read line");
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
 
-        temperature =
-            match input.trim().parse::<f32>() {
-                Ok(num) => num,
-                Err(error) => {
-                    println!("Error: {}", error);
-                    println!("Please enter a valid number.");
-                    continue;
-                }
-            };
+        temperature = match input.trim().parse::<f32>() {
+            Ok(num) => num,
+            Err(error) => {
+                println!("Error: {}", error);
+                println!("Please enter a valid number.");
+                continue;
+            }
+        };
 
         break;
     }
