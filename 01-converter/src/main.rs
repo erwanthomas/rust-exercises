@@ -6,11 +6,11 @@ fn main() {
 
     println!("Available conversions:");
     println!();
-    println!("  {}: Farenheit => Celsius", F2C);
-    println!("  {}: Celsius => Farenheit", C2F);
+    println!("  {}: Fahrenheit => Celsius", F2C);
+    println!("  {}: Celsius => Fahrenheit", C2F);
     println!();
 
-    let mut conversion;
+    let mut conversion: u8;
 
     loop {
         print!("Your choice ? ");
@@ -22,10 +22,9 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read line");
 
-        conversion = match input.trim().parse::<u8>() {
+        conversion = match input.trim().parse() {
             Ok(num) => num,
-            Err(error) => {
-                println!("Error: {}", error);
+            Err(_) => {
                 println!("Please enter a valid conversion.");
                 continue;
             }
@@ -40,7 +39,8 @@ fn main() {
         }
     }
 
-    let temperature;
+    let temperature_input: String;
+    let temperature: f32;
 
     loop {
         print!("Your temperature ? ");
@@ -52,31 +52,44 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read line");
 
-        temperature = match input.trim().parse::<f32>() {
+        let input = input.trim();
+
+        temperature = match input.parse() {
             Ok(num) => num,
-            Err(error) => {
-                println!("Error: {}", error);
-                println!("Please enter a valid number.");
+            Err(_) => {
+                println!("Please enter a valid temperature.");
                 continue;
             }
         };
 
+        temperature_input = input.to_string();
+
         break;
     }
 
-    println!();
-
     match conversion {
-        F2C => println!("{} Fahrenheit => {} Celsius", temperature, f2c(temperature)),
-        C2F => println!("{} Celsius => {} Fahrenheit", temperature, c2f(temperature)),
+        F2C => println!(
+            "{} Fahrenheit => {} Celsius",
+            temperature_input,
+            f2c(temperature)
+        ),
+        C2F => println!(
+            "{} Celsius => {} Fahrenheit",
+            temperature_input,
+            c2f(temperature)
+        ),
         _ => println!("Unknown conversion"),
     }
 }
 
+fn round_2(num: f32) -> f32 {
+    (num * 100.0).round() / 100.0
+}
+
 fn f2c(temp: f32) -> f32 {
-    (temp - 32.0) / 1.8
+    round_2((temp - 32.0) / 1.8)
 }
 
 fn c2f(temp: f32) -> f32 {
-    temp * 1.8 + 32.0
+    round_2((temp * 1.8) + 32.0)
 }
