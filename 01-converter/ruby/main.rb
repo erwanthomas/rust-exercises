@@ -1,24 +1,25 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
 def f2c(temperature)
-  (temperature - 32.0) / 1.8
+  ((temperature - 32.0) / 1.8).round(2)
 end
 
 def c2f(temperature)
-  temperature * 1.8 + 32
+  (temperature * 1.8 + 32).round(2)
 end
 
 def input(type_cast)
-  send(type_cast, gets.chomp)
-rescue => error
-  puts error
+  send(type_cast, gets.chomp) rescue nil
 end
 
-puts <<~out
+puts <<~OUT
   Available conversions:
 
     0: Fahrenheit => Celsius
     1: Celsius => Fahrenheit
 
-out
+OUT
 
 conversion = nil
 
